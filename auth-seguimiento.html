@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Seguimiento de vehículo</title>
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="imgs/favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="imgs/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="imgs/favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="imgs/favicon/site.webmanifest" />
+    <link rel="stylesheet" href="css/auth-seguimiento.css" />
+  </head>
+
+  <body>
+    <main class="full-screen-container">
+      <div class="content-wrapper">
+        <img src="imgs/logo rical.png" alt="Logo Ricaldone" class="logo" />
+        <span class="main-title">Sistema de Gestión de Vehículos</span>
+        <p class="main-content">
+          Ingresa tu número de placa, tarjeta de circulación o tu DUI.
+        </p>
+        <div class="input-form">
+          <input
+            id="placa"
+            name="placa"
+            placeholder="P000-000"
+            type="text"
+            aria-label="Número de placa, tarjeta de circulación o DUI"
+          />
+          <button type="button" class="action-button" id="verSeguimientoBtn">
+            Ver seguimiento
+          </button>
+        </div>
+      </div>
+    </main>
+    <script src="js/auth-seguimiento.js"></script>
+  </body>
+</html>

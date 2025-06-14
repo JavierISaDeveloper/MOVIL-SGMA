@@ -1,0 +1,187 @@
+:root {
+    --dark-background: rgba(40, 40, 40, 1);
+    --text-light: rgba(255, 255, 255, 1);
+    --yellow-text: rgba(255, 204, 0, 1);
+    --input-bg: #f9f9f9;
+    --input-border: #ccc;
+    --button-red: rgba(197, 26, 29, 1);
+    --button-hover-red: rgba(135, 31, 31, 1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Helvetica, sans-serif;
+}
+
+body {
+    background-color: var(--dark-background); /* Main background for the whole page */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden; /* Prevent body scroll to ensure rounded corners on small screens */
+    position: relative; /* For the background image */
+}
+
+/* Optional: Background image for the body if you still want it. */
+/* Make sure 'backround-2-flat.png' is in the correct path relative to your CSS file. */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('backround-2-flat.png'); /* Adjust path as needed */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.2; /* Slightly faded background image */
+    z-index: -1; /* Keep it behind the content */
+}
+
+
+.full-screen-container {
+    background-color: var(--dark-background); /* Same as body to blend seamlessly */
+    width: 100%;
+    max-width: 500px; /* Max width for readability on larger screens */
+    height: 100%; /* Take full height of the viewport */
+    border-radius: 20px; /* Rounded corners for the "app" feel */
+    overflow: hidden; /* Important for rounded corners to work correctly */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center content vertically */
+    align-items: center;
+    text-align: center;
+    padding: 30px 20px; /* Padding inside the container */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* Subtle shadow for depth */
+
+    /* For true full-screen on mobile, especially iPhone Safari bottom bar */
+    min-height: -webkit-fill-available;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* On smaller screens, remove max-width and let it fill */
+@media (max-width: 500px) {
+    .full-screen-container {
+        width: 100vw;
+        height: 100vh;
+        border-radius: 0; /* Remove rounded corners on very small screens for full coverage */
+        padding: 20px 15px; /* Adjust padding */
+    }
+}
+
+
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Vertically center content if there's extra space */
+    width: 100%;
+    max-width: 350px; /* Max width for the inner content to prevent stretching */
+    gap: 25px; /* Space between elements */
+}
+
+.logo {
+    width: 180px; /* Adjusted size */
+    max-width: 80%; /* Responsive logo size */
+    height: auto;
+}
+
+.main-title {
+    font-size: 2rem; /* Responsive font size */
+    font-weight: 900;
+    color: var(--text-light);
+    line-height: 1.2; /* Improve readability */
+}
+
+.main-content {
+    font-size: 1.1rem; /* Responsive font size */
+    line-height: 1.5;
+    color: var(--yellow-text);
+    padding: 0 10px; /* Add some horizontal padding */
+}
+
+.input-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Space between input and button */
+    width: 100%;
+}
+
+.input-form input {
+    outline: none;
+    background: var(--input-bg);
+    box-shadow: transparent 0px 0px 0px 1px inset;
+    padding: 15px 20px; /* Increased padding */
+    border-radius: 12px; /* Slightly less rounded than buttons */
+    border: 1px solid var(--input-border);
+    color: var(--dark-background); /* Darker text in input */
+    font-size: 1.1rem; /* Responsive font size */
+    width: 100%;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input-form input:focus {
+    border-color: var(--button-red); /* Highlight on focus */
+    box-shadow: 0 0 0 2px rgba(197, 26, 29, 0.3);
+}
+
+.action-button {
+    border: none;
+    background: var(--button-red);
+    color: var(--text-light);
+    padding: 18px 25px; /* Increased padding */
+    border-radius: 14px; /* Maintain rounded corners */
+    font-weight: bold;
+    font-size: 1.2rem; /* Responsive font size */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 100%;
+}
+
+.action-button:hover {
+    background-color: var(--button-hover-red);
+    transform: translateY(-2px); /* Slight lift on hover */
+}
+
+.action-button:active {
+    transform: translateY(0);
+}
+
+/* Media Queries for finer responsiveness */
+@media (max-width: 375px) { /* Adjust for smaller phones like iPhone SE */
+    .main-title {
+        font-size: 1.8rem;
+    }
+    .main-content {
+        font-size: 1rem;
+    }
+    .input-form input {
+        padding: 12px 15px;
+        font-size: 1rem;
+    }
+    .action-button {
+        padding: 15px 20px;
+        font-size: 1.1rem;
+    }
+    .logo {
+        width: 150px;
+    }
+}
+
+@media (min-width: 501px) {
+    .full-screen-container {
+        border-radius: 20px; /* Ensure rounded corners on larger screens */
+    }
+}
+
+/* If you still want a background image for the 'card' area that adapts */
+/* You could add a background-image to .full-screen-container as well,
+   but for a clean "acoplada a toda la pantalla" look, it's better on body. */

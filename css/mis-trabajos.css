@@ -1,0 +1,309 @@
+/* --- VARIABLES CSS (OPCIONAL PERO RECOMENDADO PARA TEMAS) --- */
+:root {
+    --bg-dark: #1E1E1E; /* Fondo principal de la app */
+    --card-bg: #2D2D2D; /* Fondo de las tarjetas */
+    --text-light: #FFFFFF; /* Texto principal claro */
+    --text-secondary: #B0B0B0; /* Texto secundario */
+    --text-strong: #E0E0E0; /* Texto de etiquetas */
+    --accent-blue: #42A5F5; /* Color azul para enlaces/acciones */
+    --status-finalizado: #66BB6A; /* Verde */
+    --status-en-proceso: #FFC107; /* Amarillo */
+    --status-rechazado: #EF5350; /* Rojo */
+    --border-radius-card: 16px;
+    --border-radius-status: 20px;
+    --spacing-xs: 5px;
+    --spacing-s: 8px;
+    --spacing-m: 12px;
+    --spacing-l: 16px;
+    --spacing-xl: 20px;
+}
+
+
+/* --- ESTILOS GENERALES Y DE BASE (MOBILE-FIRST) --- */
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100vh; /* Asegura que ocupe al menos el 100% de la altura de la vista */
+    display: flex; /* Para centrar el contenido principal si no ocupa toda la altura */
+    flex-direction: column; /* Apila el contenido si hay varios elementos en el body */
+    font-family: 'Roboto', sans-serif; /* Asegúrate de que Roboto esté importado o sea una fuente segura */
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    box-sizing: border-box; /* Incluye padding y border en el tamaño total */
+    -webkit-font-smoothing: antialiased; /* Suavizado de fuentes para mejor visualización */
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Contenedor principal de la app */
+.main-container {
+    flex-grow: 1; /* Permite que el contenedor crezca y ocupe el espacio disponible */
+    width: 100%; /* Ocupa todo el ancho */
+    max-width: 550px; /* Limita el ancho máximo para tabletas/escritorios */
+    margin: 0 auto; /* Centrar horizontalmente */
+    padding: var(--spacing-xl); /* Padding interior */
+    box-sizing: border-box; /* Asegura que el padding no cause desbordamiento */
+}
+
+h1 {
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.8em; /* Tamaño de título responsivo */
+    margin-bottom: var(--spacing-xl);
+    color: var(--text-light);
+}
+
+h2 {
+    font-size: 1.2em; /* Tamaño para los títulos de trabajo */
+    font-weight: 700;
+    margin: 0 0 var(--spacing-s) 0;
+    color: var(--text-light);
+}
+
+p {
+    margin: 0;
+}
+
+/* --- LISTA DE TARJETAS DE TRABAJO --- */
+.jobs-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xl); /* Espacio entre las tarjetas */
+}
+
+/* --- ESTILO INDIVIDUAL DE CADA TARJETA --- */
+.job-card {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius-card); /* Bordes redondeados para toda la tarjeta */
+    display: flex;
+    flex-direction: column; /* Por defecto, apiladas para móviles */
+    overflow: hidden; /* Muy importante para que la imagen respete el border-radius */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Sombra más prominente */
+}
+
+/* --- SECCIÓN DE LA IMAGEN DE LA TARJETA --- */
+.card-image {
+    width: 100%;
+    height: 180px; /* Altura fija para la imagen en móvil */
+    position: relative; /* Para la superposición del texto */
+    overflow: hidden; /* Asegura que la imagen no se salga de los bordes redondeados superiores */
+    /* Bordes redondeados solo arriba si la tarjeta está en columna */
+    border-top-left-radius: var(--border-radius-card);
+    border-top-right-radius: var(--border-radius-card);
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* La imagen cubre el espacio sin distorsionarse */
+    display: block;
+}
+
+.image-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: var(--spacing-l);
+    box-sizing: border-box;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.75), transparent); /* Degradado más oscuro */
+    color: var(--text-light);
+}
+
+.image-overlay .car-model {
+    font-weight: 500;
+    font-size: 1em;
+    margin: 0 0 var(--spacing-xs) 0;
+}
+
+.image-overlay .owner-name {
+    font-size: 0.85em;
+    opacity: 0.85;
+}
+
+
+/* --- SECCIÓN DE DETALLES DE LA TARJETA --- */
+.card-details {
+    padding: var(--spacing-l);
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Ocupa el espacio restante en el diseño de tarjeta */
+    gap: var(--spacing-s); /* Espacio entre las líneas de información */
+}
+
+.info-line {
+    font-size: 0.9em;
+    color: var(--text-secondary);
+}
+
+.info-line strong {
+    color: var(--text-strong);
+    font-weight: 500; /* Puedes ajustar el peso si quieres más o menos negrita */
+}
+
+
+/* --- ESTILOS DE ESTADO (FINALIZADO, EN PROCESO, RECHAZADO) --- */
+.status {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-s);
+    font-weight: 500;
+    margin-top: var(--spacing-m);
+    margin-bottom: var(--spacing-s); /* Ajuste de margen inferior */
+    font-size: 0.9em; /* Tamaño de fuente del estado */
+    padding: var(--spacing-s) var(--spacing-m); /* Padding para el "badge" del estado */
+    border-radius: var(--border-radius-status); /* Bordes redondeados para el badge */
+    max-width: fit-content; /* El ancho se ajusta al contenido */
+}
+
+.status svg {
+    width: 18px; /* Tamaño del icono de estado */
+    height: 18px; /* Tamaño del icono de estado */
+}
+
+.status.finalizado {
+    background-color: var(--status-finalizado);
+    color: var(--text-light); /* Texto blanco para este color */
+}
+.status.finalizado svg {
+    fill: var(--text-light);
+}
+
+.status.en-proceso {
+    background-color: var(--status-en-proceso);
+    color: var(--bg-dark); /* Texto oscuro para contraste en amarillo */
+}
+.status.en-proceso svg {
+    fill: var(--bg-dark);
+}
+
+.status.rechazado {
+    background-color: var(--status-rechazado);
+    color: var(--text-light);
+}
+.status.rechazado svg {
+    fill: var(--text-light);
+}
+
+
+/* --- ENLACE A LA BITÁCORA --- */
+.logbook-link {
+    color: var(--accent-blue);
+    text-decoration: none;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-s);
+    margin-top: auto; /* Empuja el enlace al fondo si hay espacio extra */
+    align-self: flex-start; /* Asegura que se alinee a la izquierda */
+    font-size: 0.95em;
+    transition: color 0.2s ease;
+}
+
+.logbook-link:hover {
+    color: #308ce0; /* Azul ligeramente más oscuro al pasar el ratón */
+}
+
+.logbook-link svg {
+    width: 20px;
+    height: 20px;
+    fill: var(--accent-blue);
+    transition: transform 0.2s ease-in-out, fill 0.2s ease;
+}
+
+.logbook-link:hover svg {
+    transform: translateX(3px); /* Animación de desplazamiento */
+    fill: #308ce0;
+}
+
+
+/* --- MEDIA QUERIES PARA PANTALLAS MÁS GRANDES (TABLETS Y ESCRITORIOS) --- */
+
+/* Para tabletas en orientación vertical o dispositivos más grandes */
+@media (min-width: 600px) {
+    .main-container {
+        padding: var(--spacing-xl) 30px; /* Más padding lateral */
+    }
+
+    h1 {
+        font-size: 2.2em;
+        margin-bottom: 40px;
+    }
+
+    .job-card {
+        flex-direction: row; /* La imagen y los detalles se ponen lado a lado */
+        height: 220px; /* Altura fija para la tarjeta completa */
+        border-radius: var(--border-radius-card); /* Asegura los bordes en la tarjeta completa */
+    }
+
+    .card-image {
+        flex-shrink: 0;
+        width: 200px; /* Ancho fijo para la imagen en desktop/tablet */
+        height: 100%; /* Ocupa toda la altura de la tarjeta */
+        border-top-left-radius: var(--border-radius-card); /* Bordes redondeados solo para la esquina superior izquierda */
+        border-bottom-left-radius: var(--border-radius-card); /* Bordes redondeados solo para la esquina inferior izquierda */
+        border-top-right-radius: 0; /* Anula el border-radius de la parte superior derecha */
+    }
+
+    .card-details {
+        padding: var(--spacing-xl); /* Más padding dentro de los detalles */
+        justify-content: space-between; /* Distribuye el espacio verticalmente */
+    }
+
+    h2 {
+        font-size: 1.3em;
+    }
+
+    .info-line {
+        font-size: 0.95em;
+    }
+
+    .status {
+        font-size: 0.9em;
+        margin-top: var(--spacing-m); /* Ajusta margen si la tarjeta es horizontal */
+    }
+
+    .logbook-link {
+        font-size: 1em;
+    }
+}
+
+/* Para escritorios pequeños o tabletas en orientación horizontal */
+@media (min-width: 800px) {
+    .main-container {
+        max-width: 900px; /* Permite más ancho */
+        padding: 40px;
+    }
+
+    .jobs-list {
+        display: grid; /* Cambia a grid para diseño de múltiples columnas */
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* 2-3 columnas */
+        gap: 30px; /* Espacio entre elementos de la grid */
+    }
+
+    .job-card {
+        flex-direction: column; /* Vuelve a apilar para el grid, como tarjetas individuales */
+        height: auto; /* Altura automática en grid */
+    }
+
+    .card-image {
+        width: 100%; /* La imagen ocupa todo el ancho de la tarjeta */
+        height: 200px; /* Altura de la imagen en el grid */
+        /* Restaurar bordes redondeados completos en la parte superior de la imagen */
+        border-top-left-radius: var(--border-radius-card);
+        border-top-right-radius: var(--border-radius-card);
+        border-bottom-left-radius: 0; /* Asegurarse de que no haya bordes inferiores */
+    }
+
+    .card-details {
+        padding: var(--spacing-xl);
+        justify-content: flex-start; /* Alinea al inicio si hay más contenido */
+    }
+}
+
+/* Para escritorios grandes */
+@media (min-width: 1200px) {
+    .main-container {
+        max-width: 1100px;
+    }
+}

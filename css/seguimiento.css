@@ -1,0 +1,442 @@
+:root {
+    --primary-dark: #1a1a1a;
+    --secondary-dark: #2b2b2b;
+    --text-light: #f0f0f0;
+    --text-mid: #aaa;
+    --text-dark: #333;
+    --status-green: #90ee90;
+    --contact-blue: #5a7dcb;
+    --contact-blue-hover: #4a6cb1;
+    --back-button-bg: #444;
+    --back-button-hover: #555;
+    --card-shadow: rgba(0, 0, 0, 0.4);
+    --task-item-bg: #3b3b3b;
+    --task-item-hover: #4a4a4a;
+    --yellow-content: rgba(255, 204, 0, 1); /* From previous code */
+}
+
+/* Base styles for the entire app container */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    margin: 0;
+    background-color: var(--primary-dark); /* Full background color */
+    color: var(--text-light);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden; /* Hide scrollbar if content is slightly larger than screen */
+    position: relative;
+}
+
+/* Optional: Background image for the body */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('backround-2-flat.png'); /* Adjust path as needed */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.1; /* Slightly faded background image */
+    z-index: -1; /* Keep it behind the content */
+}
+
+
+/* Main container for the "app screen" */
+.full-screen-app-container {
+    background-color: var(--primary-dark); /* Blends with body background */
+    width: 100%;
+    max-width: 600px; /* Max width for larger screens (e.g., tablets/desktops) */
+    height: 100vh; /* Takes full viewport height */
+    border-radius: 20px; /* Rounded corners for the app frame */
+    overflow: hidden; /* Ensures content respects border-radius */
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7); /* Subtle shadow for definition */
+
+    /* For true full-screen on mobile, especially iPhone Safari bottom bar */
+    min-height: -webkit-fill-available;
+    min-height: 100vh;
+}
+
+/* Header Styles */
+.tracker-header {
+    background-color: var(--secondary-dark);
+    padding: 1em 1.5em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Space out items */
+    color: var(--text-light);
+    border-bottom: 1px solid var(--text-dark);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Slight shadow to lift header */
+}
+
+.tracker-header h1 {
+    margin: 0;
+    font-size: 1.3em;
+    flex-grow: 1;
+    text-align: center;
+    /* Resetting margin-left for better responsiveness */
+    margin-left: 0;
+}
+
+.back-button {
+    color: var(--text-light);
+    text-decoration: none;
+    padding: 0.6em 1em;
+    background-color: var(--back-button-bg);
+    border-radius: 8px;
+    font-size: 0.85em;
+    transition: background-color 0.2s ease;
+    display: flex; /* For icon and text alignment */
+    align-items: center;
+    gap: 0.5em;
+}
+
+.back-button:hover {
+    background-color: var(--back-button-hover);
+}
+
+.back-button i {
+    font-size: 1em;
+}
+
+/* Main Content Area */
+.tracker-main-content {
+    flex-grow: 1; /* Allows it to take up remaining vertical space */
+    padding: 1.5em;
+    overflow-y: auto; /* Enable scrolling for content if it overflows */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    display: flex;
+    flex-direction: column; /* Stack sections vertically */
+    gap: 1.5em; /* Space between content sections */
+}
+
+/* Vehicle Info Card Styles */
+.vehicle-info-card {
+    background-color: var(--secondary-dark); /* Card background */
+    border-radius: 15px; /* Card rounded corners */
+    box-shadow: 0 4px 15px var(--card-shadow);
+    padding: 1.2em;
+    color: var(--text-light);
+    flex-shrink: 0; /* Prevent it from shrinking */
+}
+
+.card-header {
+    margin-bottom: 1em;
+    text-align: right; /* Align record number to right */
+}
+
+.record-number {
+    font-size: 0.85em;
+    color: var(--text-mid);
+}
+
+.vehicle-details-container {
+    display: flex;
+    gap: 1.2em;
+    margin-bottom: 1.5em;
+    flex-wrap: wrap; /* Allow wrapping */
+}
+
+.vehicle-image-wrapper {
+    flex: 0 0 150px; /* Fixed width for the image wrapper */
+    height: 150px; /* Fixed height for the image wrapper */
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+    flex-shrink: 0; /* Prevents image wrapper from shrinking */
+}
+
+.vehicle-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover; /* Ensures image covers the area */
+    border-radius: 10px;
+}
+
+.vehicle-info-text {
+    flex: 1; /* Takes remaining space */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 0.4em;
+    min-width: 180px; /* Ensure text block has a minimum width before wrapping */
+}
+
+.vehicle-info-text h2 {
+    font-size: 1.6em;
+    margin: 0;
+    color: var(--text-light);
+}
+
+.vehicle-info-text p {
+    margin: 0;
+    font-size: 0.95em;
+    color: var(--text-mid);
+}
+
+.adjustment-status {
+    font-weight: bold;
+    color: var(--status-green);
+    font-size: 1em;
+}
+
+.contact-info {
+    display: flex;
+    align-items: center;
+    margin-top: 0.8em;
+    gap: 0.8em;
+    flex-wrap: wrap; /* Allow wrapping */
+}
+
+.contact-info span {
+    font-weight: bold;
+    font-size: 1em;
+    color: var(--text-light);
+}
+
+.contact-button {
+    background-color: var(--contact-blue);
+    color: var(--text-light);
+    padding: 0.5em 1em;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.85em;
+    transition: background-color 0.2s ease;
+}
+
+.contact-button:hover {
+    background-color: var(--contact-blue-hover);
+}
+
+/* Progress Bar Styles */
+.progress-section {
+    margin-bottom: 1.5em;
+    padding-top: 1em; /* Add some space above progress bar */
+    border-top: 1px solid rgba(255,255,255,0.1); /* Separator */
+}
+
+.progress-bar-container {
+    background: linear-gradient(
+        to right,
+        #ff6b6b,
+        #ffa500,
+        #ffe600,
+        #a8e61d,
+        #28a745
+    );
+    border-radius: 10px;
+    height: 16px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.progress-bar {
+    background-color: rgba(0, 0, 0, 0.3);
+    height: 100%;
+    border-radius: 10px;
+    /* Adjusted to make the colored part grow from left, the overlay shrinks from right */
+    margin-left: auto;
+    transition: width 0.5s ease-in-out;
+}
+
+#progressPercentage {
+    position: absolute;
+    top: 50%;
+    right: 1em;
+    transform: translateY(-50%);
+    color: var(--text-light);
+    font-weight: bold;
+    font-size: 0.9em;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    z-index: 2; /* Ensure percentage is above the bar */
+}
+
+.progress-time-info {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.5em;
+    font-size: 0.85em;
+    color: var(--text-mid);
+}
+
+/* Repair Tasks Grid */
+.repair-tasks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* More flexible grid */
+    gap: 1em;
+    margin-top: 1.5em;
+    padding-top: 1em; /* Add some space above tasks */
+    border-top: 1px solid rgba(255,255,255,0.1); /* Separator */
+}
+
+.task-item {
+    background-color: var(--task-item-bg);
+    border-radius: 10px;
+    padding: 0.9em 1.2em;
+    display: flex;
+    align-items: center;
+    gap: 0.7em;
+    font-size: 0.95em;
+    color: var(--text-light);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.task-item:hover {
+    transform: translateY(-2px);
+    background-color: var(--task-item-hover);
+}
+
+.task-item i {
+    font-size: 1.3em;
+    color: var(--status-green);
+    flex-shrink: 0; /* Prevent icon from shrinking */
+}
+
+/* Updates Section */
+.updates-section {
+    background-color: var(--secondary-dark);
+    border-radius: 15px;
+    box-shadow: 0 4px 15px var(--card-shadow);
+    padding: 1.2em;
+    margin-top: 1.5em; /* Space from the vehicle card */
+    color: var(--text-light);
+    flex-shrink: 0;
+}
+
+.updates-section h2 {
+    font-size: 1.4em;
+    margin-bottom: 0.8em;
+    color: var(--text-light);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 0.5em;
+}
+
+.updates-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.updates-section ul li {
+    background-color: var(--task-item-bg);
+    margin-bottom: 0.6em;
+    padding: 0.8em 1em;
+    border-radius: 8px;
+    font-size: 0.9em;
+    color: var(--text-mid);
+    line-height: 1.4;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.updates-section ul li:last-child {
+    margin-bottom: 0;
+}
+
+/* Footer Styles */
+footer {
+    text-align: center;
+    padding: 1em; /* Reduced padding for mobile */
+    background-color: var(--secondary-dark);
+    color: #888;
+    font-size: 0.75em;
+    margin-top: auto; /* Pushes footer to the bottom */
+    border-top: 1px solid var(--text-dark);
+    flex-shrink: 0; /* Prevent footer from shrinking */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .full-screen-app-container {
+        border-radius: 0; /* Remove rounded corners on smaller devices for true full screen */
+    }
+
+    .tracker-main-content {
+        padding: 1em; /* Reduced padding */
+    }
+
+    .vehicle-details-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center; /* Center text when stacked */
+    }
+
+    .vehicle-image-wrapper {
+        width: 180px; /* Adjust size as needed */
+        height: 180px;
+    }
+
+    .vehicle-info-text {
+        align-items: center; /* Center text content for mobile */
+    }
+
+    .contact-info {
+        flex-direction: column;
+        gap: 0.6em;
+    }
+
+    .tracker-header h1 {
+        font-size: 1.2em;
+    }
+
+    .back-button {
+        font-size: 0.8em;
+        padding: 0.5em 0.8em;
+    }
+
+    .repair-tasks-grid {
+        grid-template-columns: 1fr; /* Single column on very small screens */
+    }
+
+    .task-item {
+        font-size: 0.9em;
+        padding: 0.8em 1em;
+    }
+
+    .updates-section h2 {
+        font-size: 1.3em;
+    }
+
+    .updates-section ul li {
+        font-size: 0.85em;
+    }
+}
+
+@media (max-width: 480px) {
+    .tracker-header {
+        padding: 0.8em 1em;
+    }
+    .tracker-header h1 {
+        font-size: 1.1em;
+    }
+    .vehicle-info-card, .updates-section {
+        padding: 1em;
+    }
+    .vehicle-image-wrapper {
+        width: 150px;
+        height: 150px;
+    }
+    .main-title {
+        font-size: 1.5rem;
+    }
+    .main-content {
+        font-size: 0.95rem;
+    }
+    .input-form input {
+        padding: 12px 15px;
+        font-size: 0.95rem;
+    }
+    .action-button {
+        padding: 15px 20px;
+        font-size: 1.1rem;
+    }
+}

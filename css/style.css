@@ -15,6 +15,11 @@
     font-family: sans-serif; /* Or a font similar to the image */
 }
 
+html{
+    box-shadow: 8px 8px 8px 40px white;
+    border-radius: 45px;
+}
+
 body {
     background-color: var(--background-color);
     display: flex;
